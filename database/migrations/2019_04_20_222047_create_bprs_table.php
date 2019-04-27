@@ -16,7 +16,7 @@ class CreateBprsTable extends Migration
         Schema::create('bprs', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->string('mpr_id');
+            $table->integer('mpr_id');
             $table->string('lot_number');
             $table->integer('run_count')->default(1);
             $table->integer('bottle_count')->unsigned();
