@@ -13,7 +13,7 @@ class Retention extends Model
         'expiration_length',
         'box_id',
         'user_id',
-        'product_id'
+        'project_id'
 
     ];
 
@@ -22,9 +22,9 @@ class Retention extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function product()
+    public function project()
     {
-        return $this->belongsTo(Product::class, 'product_id');
+        return $this->belongsTo(Project::class, 'project_id');
     }
 
     public function inRetention($lot)

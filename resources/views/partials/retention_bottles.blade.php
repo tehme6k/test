@@ -18,7 +18,8 @@
                 </td>
 
                 <td>
-                    {{$retention->product->name}}
+                    {{$retention->project->name}} -
+                    {{$retention->project->flavor}}
                 </td>
 
                 <td>

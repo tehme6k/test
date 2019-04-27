@@ -26,7 +26,8 @@ class RetentionController extends Controller
 
         }
 
-            $product_id = substr($request->lot_number, 0, 4);
+            $project_id = substr($request->lot_number, 0, 4);
+            $project_id = $project_id-1000;
 
             $production_date = $request->production_date;
 
@@ -36,7 +37,7 @@ class RetentionController extends Controller
 
             Retention::create([
                 'lot_number' => $request->lot_number,
-                'product_id' => $product_id,
+                'project_id' => $project_id,
                 'production_date' => $production_date,
                 'expiration_date' => $expiration_date,
                 'expiration_length' => $request->expiration_length,

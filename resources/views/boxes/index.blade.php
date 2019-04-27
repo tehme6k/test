@@ -1,75 +1,92 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="d-flex justify-content-between">
-        <div>
-            <a href="{{ route('ret.closed') }}" class="btn btn-primary mb-2">
-                View Closed Boxes
-            </a>
-        </div>
+<div class="container">
 
-        <div>
-
-
-            <button type="button" class="btn btn-success mb-2" onclick="handleAdd()">
-                Add Box
-            </button>
-
-
-        </div>
-
-    </div>
-    <div class="card card-default">
+    <div class="card card-default mb-2">
         <div class="card-header">
-            Open Retention Boxes
+            <div class="d-flex justify-content-between">
+                <div>
+                    <a href="{{ route('ret.closed') }}" class="btn btn-primary mb-2">
+                        View Closed Boxes
+                    </a>
+                </div>
 
-
-            @if(empty($retired))
-                retired
-            @endif
-
+                <div>
+                    <button type="button" class="btn btn-success mb-2" onclick="handleAdd()">
+                        Add Box
+                    </button>
+                </div>
+            </div>
         </div>
         <div class="card-body">
+            <div class="d-flex justify-content-between">
+                <div>
+                    Total Open: <br>
+                    Total Reopened:
 
-            @if($open_boxes->count() > 0)
-                <table class="table">
-                    <thead>
-                    <th>Box #</th>
-                    <th>Opened On</th>
-                    <th>Opened By</th>
-                    <th></th>
-                    </thead>
+                </div>
 
-                    <tbody>
-                    @foreach($open_boxes as $open_box)
-                        <tr>
-                            <td>
-                                {{$open_box->id}}
-                            </td>
+                <div>
+                    Total all: <br>
+                    Total Closed:
 
-                            <td>
-                                {{\Carbon\Carbon::parse($open_box->created_at)->format('d M Y')}}
-                            </td>
 
-                            <td>
-                                {{ $open_box->openedBy->name }}
-                            </td>
-
-                            <td>
-                                <a href="{{ route('boxes.show', $open_box->id) }}" class="btn btn-info btn-sm">View Contents</a>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-
-                {{$open_boxes->links()}}
-            @else
-                <h3 class="text-center">No boxes at this time</h3>
-            @endif
-
+                </div>
+            </div>
         </div>
     </div>
+<div class="card card-default">
+    <div class="card-header">
+        Open Retention Boxes
+
+
+        @if(empty($retired))
+            retired
+        @endif
+
+    </div>
+    <div class="card-body">
+
+        @if($open_boxes->count() > 0)
+            <table class="table">
+                <thead>
+                <th>Box #</th>
+                <th>Opened On</th>
+                <th>Opened By</th>
+                <th></th>
+                </thead>
+
+                <tbody>
+                @foreach($open_boxes as $open_box)
+                    <tr>
+                        <td>
+                            {{$open_box->id}}
+                        </td>
+
+                        <td>
+                            {{\Carbon\Carbon::parse($open_box->created_at)->format('d M Y')}}
+                        </td>
+
+                        <td>
+                            {{ $open_box->openedBy->name }}
+                        </td>
+
+                        <td>
+                            <a href="{{ route('boxes.show', $open_box->id) }}" class="btn btn-info btn-sm">View Contents</a>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+
+            {{$open_boxes->links()}}
+        @else
+            <h3 class="text-center">No boxes at this time</h3>
+        @endif
+
+    </div>
+</div>
 
 
     @if($reopen_datas->count() > 0)
@@ -113,7 +130,9 @@
 
             </div>
         </div>
-    @endif
+        @endif
+
+    </div>
 
     <form action="{{ route('boxes.store') }}" method="POST">
         @csrf

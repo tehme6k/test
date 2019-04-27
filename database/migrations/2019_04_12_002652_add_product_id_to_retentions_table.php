@@ -14,7 +14,7 @@ class AddProductIdToRetentionsTable extends Migration
     public function up()
     {
         Schema::table('retentions', function (Blueprint $table) {
-            $table->integer('product_id');
+            $table->integer('project_id');
         });
     }
 
