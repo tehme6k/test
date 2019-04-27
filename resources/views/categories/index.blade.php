@@ -11,9 +11,7 @@
 @endsection
 
 @section('bottom-card-header')
-    <div class="d-flex justify-content-end">
-        <button type="button" class="btn btn-success mb-2" onclick="handleAdd()">Add Category</button>
-    </div>
+    All Categories
 @endsection
 
 @section('bottom-card-body')

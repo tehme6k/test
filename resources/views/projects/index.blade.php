@@ -1,69 +1,71 @@
-@extends('layouts.app')
+@extends('layouts.index')
 
-@section('content')
+@section('top-card-header')
     <div class="d-flex justify-content-end">
         <button class="btn btn-success mb-2" type="button" onclick="handleAdd()">
             Add Project
         </button>
     </div>
-    <div class="card card-default">
-        <div class="card-header">Projects</div>
-        <div class="card-body">
+@endsection
 
-            @include('partials.errors')
+@section('top-card-body')
+    <p>Projects: <strong>{{$projects->count()}}</strong></p>
+@endsection
 
-            @if($projects->count() > 0)
-                <table class="table">
-                    <thead>
-                    <th>Name</th>
-                    <th>Flavor</th>
-                    <th>Type</th>
-                    <th>Country</th>
-                    <th>Mpr Versions</th>
+@section('bottom-card-header')
+    All Projects
+@endsection
 
-                    </thead>
+@section('bottom-card-body')
+    @if($projects->count() > 0)
+        <table class="table">
+            <thead>
+            <th>Name</th>
+            <th>Flavor</th>
+            <th>Type</th>
+            <th>Country</th>
+            <th>Mpr Versions</th>
 
-                    <tbody>
-                    @foreach($projects as $project)
-                        <tr>
-                            <td>
-                                <a href="{{ route('projects.show', $project->id) }}" class="btn btn-link btn-md">
-                                    {{$project->name}}
-                                </a>
-                            </td>
+            </thead>
 
-                            <td>
-                                {{ $project->flavor }}
-                            </td>
+            <tbody>
+            @foreach($projects as $project)
+                <tr>
+                    <td>
+                        <a href="{{ route('projects.show', $project->id) }}" class="btn btn-link btn-md">
+                            {{$project->name}}
+                        </a>
+                    </td>
 
-                            <td>
-                                {{ $project->type->name }}
-                            </td>
+                    <td>
+                        {{ $project->flavor }}
+                    </td>
 
-                            <td>
-                                {{ $project->country->name }}
-                            </td>
+                    <td>
+                        {{ $project->type->name }}
+                    </td>
 
-                            <td>
-                                0
-                            </td>
+                    <td>
+                        {{ $project->country->name }}
+                    </td>
 
-
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-
-                {{$projects->links()}}
-            @else
-                <h3 class="text-center">No products at this time</h3>
-            @endif
-
-        </div>
-    </div>
+                    <td>
+                        0
+                    </td>
 
 
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
 
+        {{$projects->links()}}
+    @else
+        <h3 class="text-center">No products at this time</h3>
+    @endif
+@endsection
+
+@section('content')
     <form action="{{ route('projects.store') }}" method="POST">
         @csrf
         <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
@@ -119,11 +121,9 @@
         </div>
 
     </form>
-
-
-
 @endsection
 
 @section('scripts')
 
 @endsection
+

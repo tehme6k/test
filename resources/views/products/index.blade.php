@@ -1,54 +1,59 @@
-@extends('layouts.app')
+@extends('layouts.index')
 
-@section('content')
+@section('top-card-header')
     <div class="d-flex justify-content-end">
         <button class="btn btn-success mb-2" type="button" onclick="handleAdd()">
             Add product
         </button>
     </div>
-    <div class="card card-default">
-        <div class="card-header">Products</div>
-        <div class="card-body">
-            @if($products->count() > 0)
-                <table class="table">
-                    <thead>
-                    <th>Name</th>
-                    <th>Category</th>
-                    <th>Created By</th>
+@endsection
 
-                    </thead>
+@section('top-card-body')
+    <p>All Products: <strong>{{$products->count()}}</strong></p>
+@endsection
 
-                    <tbody>
-                    @foreach($products as $product)
-                        <tr>
-                            <td>
-                                <a href="{{route('products.show', $product->id)}}" class="btn btn-link btn-md">
-                                    {{$product->name}}
-                                </a>
-                            </td>
+@section('bottom-card-header')
+    All Products
+@endsection
 
-                            <td>
-                                {{ $product->category->name }}
-                            </td>
+@section('bottom-card-body')
+    @if($products->count() > 0)
+        <table class="table">
+            <thead>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Created By</th>
 
-                            <td>
-                                {{ $product->user->name }}
-                            </td>
+            </thead>
 
+            <tbody>
+            @foreach($products as $product)
+                <tr>
+                    <td>
+                        <a href="{{route('products.show', $product->id)}}" class="btn btn-link btn-md">
+                            {{$product->name}}
+                        </a>
+                    </td>
 
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            @else
-                <h3 class="text-center">No products at this time</h3>
-            @endif
+                    <td>
+                        {{ $product->category->name }}
+                    </td>
 
-        </div>
-    </div>
+                    <td>
+                        {{ $product->user->name }}
+                    </td>
 
 
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    @else
+        <h3 class="text-center">No products at this time</h3>
+    @endif
+@endsection
 
+@section('content')
     <form action="{{ route('products.store') }}" method="POST">
         @csrf
         <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
@@ -87,11 +92,10 @@
         </div>
 
     </form>
-
-
-
 @endsection
 
 @section('scripts')
 
 @endsection
+
+

@@ -1,69 +1,75 @@
-@extends('layouts.app')
+@extends('layouts.index')
 
-@section('content')
+@section('top-card-header')
     <div class="d-flex justify-content-end">
         <button type="button" class="btn btn-primary my-2" onclick="handleAdd()">
             Add User
         </button>
     </div>
-    <div class="card card-default">
-        <div class="card-header">Users</div>
-        <div class="card-body">
-            @if($users->count() > 0)
-                <table class="table">
-                    <thead>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>When</th>
-                    <th>Created By</th>
-                    <th></th>
-                    </thead>
+@endsection
 
-                    <tbody>
-                    @foreach($users as $user)
-                        <tr>
-                            <td>
-                                {{$user->name}}
-                            </td>
+@section('top-card-body')
+    <p>Users: <strong>{{$users->count()}}</strong></p>
+@endsection
 
-                            <td>
-                                {{ $user->email }}
-                            </td>
+@section('bottom-card-header')
+    All Users
+@endsection
 
-                            <td>
-                                {{ $user->role }}
-                            </td>
+@section('bottom-card-body')
+    @if($users->count() > 0)
+        <table class="table">
+            <thead>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>When</th>
+            <th>Created By</th>
+            <th></th>
+            </thead>
 
-                            <td>
-                                {{ $user->created_at->diffForHumans() }}
-                            </td>
+            <tbody>
+            @foreach($users as $user)
+                <tr>
+                    <td>
+                        {{$user->name}}
+                    </td>
 
-                            <td>
-                                @if($user->created_by == 0)
-                                    {{ $user->name }}
-                                @else
-                                    {{ $user->createdBy->name }}
-                                @endif
-                            </td>
+                    <td>
+                        {{ $user->email }}
+                    </td>
 
-                            <td>
-                                <a href="#" class="btn btn-info btn-sm">
-                                    View
-                                </a>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            @else
-                <h3 class="text-center">No users at this time</h3>
-            @endif
+                    <td>
+                        {{ $user->role }}
+                    </td>
 
-        </div>
-    </div>
+                    <td>
+                        {{ $user->created_at->diffForHumans() }}
+                    </td>
 
+                    <td>
+                        @if($user->created_by == 0)
+                            {{ $user->name }}
+                        @else
+                            {{ $user->createdBy->name }}
+                        @endif
+                    </td>
 
+                    <td>
+                        <a href="#" class="btn btn-info btn-sm">
+                            View
+                        </a>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    @else
+        <h3 class="text-center">No users at this time</h3>
+    @endif
+@endsection
+
+@section('content')
     <form action="{{ route('users.store') }}" method="POST">
         @csrf
         <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
