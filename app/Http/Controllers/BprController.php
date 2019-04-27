@@ -11,6 +11,7 @@ use App\BprProduct;
 use App\MprProduct;
 use App\Product;
 use App\Mpr;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -34,16 +35,19 @@ class BprController extends Controller
 
 
         if($request->run_count == null){
-            $run_count = $request->run_count + 1001;
+            $run_count = 1;
         }
         else{
             $run_count = $request->run_count + 1;
         }
 
-        $pn = str_pad($request->project_id, 4, "0", STR_PAD_LEFT);
-        $count = str_pad($run_count, 5, "0", STR_PAD_LEFT);
 
-        $lot = $pn.$count;
+        $dt = Carbon::now();
+        $dt = substr($dt->toDateString(), 2, 2);
+        $pn = $request->project_id + 1000;
+        $count = str_pad($run_count, 3, "0", STR_PAD_LEFT);
+
+        $lot = $pn.$dt.$count;
 
 
         $bpr = Bpr::create([
