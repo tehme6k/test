@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d1f688f1-d203-4203-b453-11abf59a7c98" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/layouts/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/partials/indexsidebar.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/categories/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/categories/index.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,8 +20,26 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/categories/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="61" selection-start-line="14" selection-start-column="61" selection-end-line="14" selection-end-column="61" />
+            <state relative-caret-position="-153">
+              <caret column="23" selection-start-column="23" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/partials/indexsidebar.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="603">
+              <caret line="92" column="35" selection-start-line="92" selection-start-column="35" selection-end-line="92" selection-end-column="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/layouts/app.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-196">
+              <caret line="36" column="28" lean-forward="true" selection-end-line="93" />
             </state>
           </provider>
         </entry>
@@ -48,8 +68,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/resources/views/inventory/index.blade.php" />
-        <option value="$PROJECT_DIR$/app/Type.php" />
         <option value="$PROJECT_DIR$/app/Country.php" />
         <option value="$PROJECT_DIR$/database/seeds/CountrySeeder.php" />
         <option value="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
@@ -98,6 +116,8 @@
         <option value="$PROJECT_DIR$/resources/views/boxes/closed.blade.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_04_12_002652_add_product_id_to_retentions_table.php" />
         <option value="$PROJECT_DIR$/resources/views/boxes/index.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/partials/indexsidebar.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/layouts/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/categories/index.blade.php" />
       </list>
     </option>
@@ -219,14 +239,21 @@
               <item name="ret" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="boxes" type="462c0819:PsiDirectoryNode" />
+              <item name="categories" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ret" type="b2602c69:ProjectViewProjectNode" />
               <item name="ret" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="categories" type="462c0819:PsiDirectoryNode" />
+              <item name="layouts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ret" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ret" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="partials" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -290,7 +317,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="210206000" />
+    <option name="totallyTimeSpent" value="211171000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -311,7 +338,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.33044422" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.16576381" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -344,33 +371,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/database/seeds/InventoriesTableSeeder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
-          <folding>
-            <element signature="e#7#38#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/seeds/DatabaseSeeder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/seeds/CountrySeeder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
-          <folding>
-            <element signature="e#7#23#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/categories/create.blade.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -602,13 +602,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/app.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="36" column="28" lean-forward="true" selection-start-line="36" selection-start-column="32" selection-end-line="36" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Mpr.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="457">
@@ -708,10 +701,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/partials/sidebar.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="75" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/partials/indexsidebar.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="603">
+          <caret line="92" column="35" selection-start-line="92" selection-start-column="35" selection-end-line="92" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="501">
+          <caret line="73" column="14" lean-forward="true" selection-start-line="73" selection-start-column="14" selection-end-line="73" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/app.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-196">
+          <caret line="36" column="28" lean-forward="true" selection-end-line="93" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/categories/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="61" selection-start-line="14" selection-start-column="61" selection-end-line="14" selection-end-column="61" />
+        <state relative-caret-position="-153">
+          <caret column="23" selection-start-column="23" selection-end-column="23" />
         </state>
       </provider>
     </entry>

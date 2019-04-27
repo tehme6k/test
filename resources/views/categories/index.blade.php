@@ -1,61 +1,57 @@
-@extends('layouts.app')
+@extends('layouts.index')
+
+@section('top-card-header')
+    <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-success mb-2" onclick="handleAdd()">Add Category</button>
+    </div>
+@endsection
+
+@section('top-card-body')
+    <p>Categories: <strong>{{$categories->count()}}</strong></p>
+@endsection
+
+@section('bottom-card-header')
+    <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-success mb-2" onclick="handleAdd()">Add Category</button>
+    </div>
+@endsection
+
+@section('bottom-card-body')
+    @if($categories->count() > 0)
+        <table class="table">
+            <thead>
+            <th>Name</th>
+            <th>Categories Count</th>
+            <th></th>
+            </thead>
+
+            <tbody>
+            @foreach($categories as $category)
+                <tr>
+                    <td>
+                        {{$category->name}}
+                    </td>
+
+                    <td>
+                        {{ $category->products->count() }}
+                    </td>
+
+                    <td>
+                        <a href="#" class="btn btn-info btn-sm">
+                            View Details
+                        </a>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    @else
+        <h3 class="text-center">No categories at this time</h3>
+    @endif
+@endsection
 
 @section('content')
-    <div class="container">
-        @include('partials.errors')
 
-        <div class="card card-default mb-2">
-            <div class="card-header">
-                <div class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-success mb-2" onclick="handleAdd()">Add Category</button>
-                </div>
-            </div>
-
-            <div class="card-body">
-                <p>Categories: <strong>{{$categories->count()}}</strong></p>
-            </div>
-        </div>
-
-
-        <div class="card card-default">
-            <div class="card-header">Categories</div>
-            <div class="card-body">
-                @if($categories->count() > 0)
-                    <table class="table">
-                        <thead>
-                        <th>Name</th>
-                        <th>Categories Count</th>
-                        <th></th>
-                        </thead>
-
-                        <tbody>
-                        @foreach($categories as $category)
-                            <tr>
-                                <td>
-                                    {{$category->name}}
-                                </td>
-
-                                <td>
-                                    {{ $category->products->count() }}
-                                </td>
-
-                                <td>
-                                    <a href="#" class="btn btn-info btn-sm">
-                                        View Details
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                @else
-                    <h3 class="text-center">No categories at this time</h3>
-                @endif
-
-            </div>
-        </div>
-
-    </div>
 
 
     <form action="{{ route('categories.store') }}" method="POST">
