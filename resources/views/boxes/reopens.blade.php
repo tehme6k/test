@@ -1,53 +1,76 @@
-@extends('layouts.app')
+@extends('layouts.show')
+
+@section('jumbotron-header')
+    <div class="d-flex justify-content-start">
+        <div>
+            <a href="{{ route('boxes.index') }}" class="btn btn-link">View All Open Boxes</a>
+        </div>
+    </div>
+
+    Retention Box # <strong>{{$box->id}}</strong>
+@endsection
+
+
+@section('jumbotron-under-header')
+     <strong>{{ $box->status }} -
+    {{$retentions->count()}}</strong> total products</h3>
+@endsection
+
+
+@section('jumbotron-content')
+    <h3>Requested By: <strong>{{$reopendata->requestedBy->name}}</strong><br></h3>
+    <h3>On: <strong>{{\Carbon\Carbon::parse($reopendata->reopen_date)->format('d M Y')}}</strong><br></h3>
+    <h3>Reason: <strong>{{$reopendata->reason}}</strong></h3>
+@endsection
+
+
+@section('jumbotron-buttons')
+    <button type="button" class="btn btn-outline-danger" onclick="handleClose()">
+        Close this box
+    </button>
+@endsection
+
+
+@section('table-header')
+    <th>Lot #</th>
+    <th>Name</th>
+    <th>Production</th>
+    <th>Expiration</th>
+    <th>Added By</th>
+@endsection
+
+
+@section('table-body')
+    @foreach($retentions as $retention)
+        <tr>
+            <td>
+                {{substr($retention->lot_number, 0, 4)}} -
+                {{substr($retention->lot_number, 4, 2)}} -
+                {{substr($retention->lot_number, 6, 3)}}
+            </td>
+
+            <td>
+                {{$retention->project->name}} -
+                {{$retention->project->flavor}}
+            </td>
+
+            <td>
+                {{\Carbon\Carbon::parse($retention->production_date)->format('d M Y')}}
+            </td>
+
+            <td>
+                {{\Carbon\Carbon::parse($retention->expiration_date)->format('d M Y')}}
+            </td>
+
+            <td>
+                {{ $retention->user->name }}
+            </td>
+        </tr>
+    @endforeach
+@endsection
+
 
 @section('content')
-
-    <div class="d-flex justify-content-between mb-2">
-        <div>
-            <a href="{{route('boxes.index')}}" class="btn btn-primary">
-                Back
-            </a>
-        </div>
-
-        <div>
-            <button type="button" class="btn btn-outline-danger" onclick="handleClose()">
-                Close this box
-            </button>
-        </div>
-    </div>
-
-
-    <div class="card card-default mb-4">
-        <div class="card-header">
-            Info for reopen of Box #: {{$box->id}}
-        </div>
-
-        <div class="card-body">
-            Requested By: <strong>{{$reopendata->requestedBy->name}}</strong><br>
-            On: <strong>{{\Carbon\Carbon::parse($reopendata->reopen_date)->format('d M Y')}}</strong><br>
-            Reason: <strong>{{$reopendata->reason}}</strong>
-
-        </div>
-    </div>
-
-
-    <div class="card card-default">
-        <div class="card-header">Reopened Retention Box # {{$box->id}}</div>
-        <div class="card-body">
-
-            @include('partials.errors')
-            @include('partials.retention_bottles')
-
-
-        </div>
-    </div>
-
-
-
-
-
-
-
     <form action="{{ route('reopen.close', [$box->id, $reopendata->id]) }}" method="POST">
         @csrf
         @method('PUT')
@@ -75,10 +98,7 @@
             </div>
         </div>
     </form>
-
-
 @endsection
-
 
 
 @section('css')

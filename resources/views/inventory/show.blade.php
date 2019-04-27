@@ -1,71 +1,41 @@
-@extends('layouts.app')
+@extends('layouts.show')
+
+@section('jumbotron-header')
+    <div class="d-flex justify-content-start">
+        <div>
+            <a href="{{ route('products.show', $inventory->product->id) }}" class="btn btn-link">Back</a>
+        </div>
+    </div>
+    {{$inventory->product->name}}
+@endsection
+
+
+@section('jumbotron-under-header')
+    {{number_format($inventory->amount, 2)}} {{$unit}}
+@endsection
+
+
+@section('jumbotron-content')
+    <h4>Status <strong>{{$inventory->status}}</strong></h4>
+    <h3>Created <strong>{{ $inventory->created_at->diffForHumans()}}</strong></h3>
+    <h3>By <strong>{{ $inventory->createdBy->name }}</strong></h3>
+@endsection
+
+
+@section('jumbotron-buttons')
+    @if($inventory->status != 'approved')
+        <button type="button" class="btn btn-success mb-2 " onclick="handleApprove()">Approve</button>
+    @endif
+
+    @if($inventory->status != 'rejected')
+        <button type="button" class="btn btn-danger mb-2 ml-2" onclick="handleReject()">Reject</button>
+    @endif
+
+@endsection
+
+
 
 @section('content')
-    <div class="d-flex justify-content-end">
-        <button type="button" class="btn btn-success mb-2 " onclick="handleApprove()">Approve</button>
-
-        <button type="button" class="btn btn-danger mb-2 ml-2" onclick="handleReject()">Reject</button>
-
-    </div>
-
-    @include('partials.errors')
-
-    <div class="card card-default">
-        <div class="card-header d-flex justify-content-between">
-            <div>
-                {{$inventory->product->name}}
-            </div>
-
-            <div>
-                @if(isset($total))
-                    Total: {{number_format($total->sum('amount'), 2)}}
-                    {{$inventory->product->category->name == 'Powder' ? 'Kg' : 'each'}}
-                @else
-                    Total: 0
-                @endif
-            </div>
-        </div>
-        <div class="card-body">
-            @if($inventory->count() > 0)
-
-
-                <table class="table">
-                    <thead>
-                    <th>Amount</th>
-                    <th>Added By</th>
-                    <th>Added On</th>
-                    <th>Status</th>
-                    </thead>
-
-                    <tbody>
-                                            <tr>
-                            <td>
-                                {{number_format($inventory->amount, 2)}} {{$unit}}
-                            </td>
-
-                            <td>
-                                {{ $inventory->createdBy->name }}
-                            </td>
-
-                            <td>
-                                {{ $inventory->created_at}}
-                            </td>
-
-                            <td>
-                                {{$inventory->status}}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-
-            @else
-                <h3 class="text-center">No inventory at this time</h3>
-            @endif
-
-        </div>
-    </div>
-
     <form autocomplete="off" action="{{route('inventories.approve', $inventory->id)}}" method="POST">
         @csrf
         @method('PUT')
@@ -80,15 +50,15 @@
                     </div>
                     <div class="modal-body">
 
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="text" class="form-control" name="email">
-                    </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="text" class="form-control" name="email">
+                        </div>
 
-                    <div class="form-group">
-                        <label for="email">Password</label>
-                        <input type="password" class="form-control" name="password">
-                    </div>
+                        <div class="form-group">
+                            <label for="email">Password</label>
+                            <input type="password" class="form-control" name="password">
+                        </div>
 
 
 
@@ -140,11 +110,8 @@
 
     </form>
 
-
-
-
-
 @endsection
+
 
 @section('scripts')
     <script>

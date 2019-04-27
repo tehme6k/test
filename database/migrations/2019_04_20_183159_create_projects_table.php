@@ -25,6 +25,8 @@ class CreateProjectsTable extends Migration
 
             $table->timestamps();
         });
+
+        DB::update("ALTER TABLE projects AUTO_INCREMENT = 1001");
     }
 
     /**

@@ -1,79 +1,79 @@
-@extends('layouts.app')
+@extends('layouts.show')
+
+@section('jumbotron-header')
+    {{$product->name}}
+@endsection
+
+
+@section('jumbotron-under-header')
+    {{ $product->category->name }}
+@endsection
+
+
+@section('jumbotron-content')
+    <h3> By: <strong> {{ $product->user->name }}</strong></h3>
+    @if(isset($total))
+        <h4>Total: {{number_format($total->sum('amount'), 2)}} {{$unit}}</h4>
+    @else
+        <h4>Total: 0</h4>
+    @endif
+@endsection
+
+
+@section('jumbotron-buttons')
+    <div>
+        <button type="button" class="btn btn-success mb-2 " onclick="handleAdd()">Add</button>
+        @if($total->sum('amount') > 0)
+            <button type="button" class="btn btn-danger mb-2 ml-2" onclick="handleRemove()">Remove</button>
+        @endif
+    </div>
+@endsection
+
+
+@section('table-header')
+    <th>Amount</th>
+    <th>Added By</th>
+    <th>Added On</th>
+    <th>Status</th>
+@endsection
+
+
+@if($inventories->count() > 0)
+    @section('table-body')
+        @foreach($inventories as $inventory)
+            <tr>
+                <td>
+                    <a href="{{ route('inventories.show', $inventory->id) }}" class="btn btn-link">
+                        {{number_format($inventory->amount, 2)}} {{$unit}}
+                    </a>
+                </td>
+
+                <td>
+                    {{ $inventory->createdBy->name }}
+                </td>
+
+                <td>
+                    {{ $inventory->created_at}}
+                </td>
+
+                <td>
+                    {{$inventory->status}}
+                </td>
+            </tr>
+        @endforeach
+    @endsection
+@else
+    @section('table-body')
+        <tr>
+            <td colspan="4">
+                Nothing to show.
+            </td>
+        </tr>
+    @endsection
+@endif
+
 
 @section('content')
-    <div class="d-flex justify-content-between">
-
-        <div>
-            <a href="{{ URL::previous() }}" type="button" class="btn btn-primary mb-2 ">Back</a>
-        </div>
-
-        <div>
-            <button type="button" class="btn btn-success mb-2 " onclick="handleAdd()">Add</button>
-            @if($total->sum('amount') > 0)
-                <button type="button" class="btn btn-danger mb-2 ml-2" onclick="handleRemove()">Remove</button>
-            @endif
-        </div>
-
-    </div>
-
-    @include('partials.errors')
-
-    <div class="card card-default">
-        <div class="card-header d-flex justify-content-between">
-            <div>
-                {{$product->name}}
-            </div>
-
-            <div>
-               @if(isset($total))
-                    Total: {{number_format($total->sum('amount'), 2)}} {{$unit}}
-               @else
-                   Total: 0
-               @endif
-            </div>
-        </div>
-        <div class="card-body">
-            @if($inventories->count() > 0)
-
-                <table class="table">
-                    <thead>
-                    <th>Amount</th>
-                    <th>Added By</th>
-                    <th>Added On</th>
-                    <th>Status</th>
-                    </thead>
-
-                    <tbody>
-                    @foreach($inventories as $inventory)
-                        <tr>
-                            <td>
-                                <a href="{{ route('inventories.show', $inventory->id) }}" class="btn btn-link btn-sm">
-                                    {{number_format($inventory->amount, 2)}} {{$unit}}
-                                </a>
-                            </td>
-
-                            <td>
-                                {{ $inventory->createdBy->name }}
-                            </td>
-
-                            <td>
-                                {{ $inventory->created_at}}
-                            </td>
-
-                            <td>
-                                {{$inventory->status}}
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            @else
-                <h3 class="text-center">No inventory at this time</h3>
-            @endif
-
-        </div>
-    </div>
-
     <form action="{{$unit == 'Kg' ?  route('inventories.powder.store')  :  route('inventories.nonpowder.store') }}" method="POST">
         @csrf
         <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
@@ -168,12 +168,8 @@
         </div>
 
     </form>
-
-
-
-
-
 @endsection
+
 
 @section('scripts')
     <script>

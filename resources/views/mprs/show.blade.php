@@ -1,98 +1,101 @@
-@extends('layouts.app')
+@extends('layouts.show')
+
+@section('jumbotron-header')
+        <div class="d-flex justify-content-start">
+                <div>
+                        <a href="{{ route('projects.show', $mpr->project->id) }}" class="btn btn-link ">Back to project</a>
+                </div>
+        </div>
+        {{ $mpr->project->name }} -
+        {{ $mpr->project->flavor }}
+@endsection
+
+
+@section('jumbotron-under-header')
+        MPR Version # <strong>{{$mpr->version}}</strong>
+@endsection
+
+
+@section('jumbotron-content')
+        By <strong> {{ $mpr->createdBy->name }}</strong> -
+                    {{ $mpr->created_at->diffForHumans() }}
+@endsection
+
+
+@section('jumbotron-buttons')
+        <div>
+                @if($mpr->status == 'approved')
+                        <button type="button" class="btn btn-success mb-2 " onclick="handleNewBPR()">Create BPR</button>
+                @else
+                        <button type="button" class="btn btn-success mr-5 " onclick="handleAdd()">Add Product</button>
+
+                        <button type="button" class="btn btn-outline-primary ml-5" onclick="handleApprove()">Approve</button>
+                @endif
+        </div>
+
+        <div class="text-center">
+                @if($bprs->count() > 0)
+                        <ul class="list-group" style="display: inline-block;">
+                                @foreach($bprs as $bpr)
+                                        <li class="list-group-item py-1 w-100">
+                                                <a href="{{route('bprs.show', $bpr->id)}}">
+                                                        {{substr($bpr->lot_number, 0, 4)}} -
+                                                        {{substr($bpr->lot_number, 4, 2)}} -
+                                                        {{substr($bpr->lot_number, 6, 3)}}
+                                                </a>
+                                        </li>
+                                @endforeach
+                        </ul>
+                @endif
+        </div>
+@endsection
+
+
+@section('table-header')
+        <th>Name</th>
+        <th>Type</th>
+        <th>Quantity</th>
+        <th>UOM</th>
+@endsection
+
+
+@if($mpr->products->count() > 0)
+        @section('table-body')
+                @foreach($mpr->products as $product)
+                        <tr>
+                                <td>
+                                        {{$product->name}}
+                                </td>
+
+                                <td>
+                                        {{$product->category->name}}
+                                </td>
+
+                                <td>
+                                        {{$product->pivot->amount}}
+                                </td>
+
+                                <td>
+                                        @if($product->category->name == 'Powder')
+                                                mg
+                                        @else
+                                                each
+                                        @endif
+                                </td>
+
+                        </tr>
+                @endforeach
+        @endsection
+@else
+        @section('table-body')
+                <tr>
+                        <td colspan="4">No data</td>
+                </tr>
+        @endsection
+@endif
+
 
 @section('content')
-
-
-        <div class="d-flex justify-content-between">
-                <div>
-                        <a href="{{ URL::previous() }}" type="button" class="btn btn-primary mb-2 ">Back</a>
-                </div>
-
-                <div>
-                        @if($mpr->status == 'approved')
-                                <div class="d-flex justify-content-end">
-                                        <button type="button" class="btn btn-success mb-2 " onclick="handleNewBPR()">Create BPR</button>
-                                </div>
-                        @else
-                                <div class="d-flex justify-content-end">
-                                        <button type="button" class="btn btn-success mb-2 " onclick="handleAdd()">Add Product</button>
-                                </div>
-                        @endif
-
-                </div>
-        </div>
-
-        @include('partials.errors')
-
-        <div class="d-flex justify-content-between mb-2">
-                <div>
-                        <h2>{{ $mpr->project->name }} -
-                                {{ $mpr->project->flavor }}</h2>
-                        By: <strong> {{ $mpr->createdBy->name }}</strong>
-
-
-                </div>
-
-                <div>
-                        <h3>Version # <strong>{{$mpr->version}}</strong></h3>
-                        Created <strong>{{ $mpr->created_at->diffForHumans() }}</strong>
-                </div>
-        </div>
-
-        @if($mpr->products->count() > 0)
-
-                <table class="table">
-                        <thead>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Quantity</th>
-                        <th>UOM</th>
-                        </thead>
-
-                        <tbody>
-                        @foreach($mpr->products as $product)
-                                <tr>
-                                        <td>
-                                                {{$product->name}}
-                                        </td>
-
-                                        <td>
-                                                {{$product->category->name}}
-                                        </td>
-
-                                        <td>
-                                                {{$product->pivot->amount}}
-                                        </td>
-
-                                        <td>
-                                                @if($product->category->name == 'Powder')
-                                                        mg
-                                                @else
-                                                        each
-                                                @endif
-                                        </td>
-
-                                </tr>
-                        @endforeach
-                        </tbody>
-                </table>
-
-                <div class="d-flex justify-content-end">
-                        @if($mpr->status == 'approved')
-
-                        @else
-                                <div>
-                                        <button type="button" class="btn btn-outline-primary mt-2" onclick="handleApprove()">Approve</button>
-                                </div>
-                        @endif
-                </div>
-
-        @else
-                <h3 class="text-center">No products added yet.</h3>
-        @endif
-
-
-
         <form action="{{ route('mpr.add') }}" method="POST">
                 @csrf
                 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
@@ -207,11 +210,8 @@
                 </div>
 
         </form>
-
-
-
-
 @endsection
+
 
 @section('scripts')
         <script>

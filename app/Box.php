@@ -5,7 +5,14 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 class Box extends Model
+
 {
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'closed_at'
+    ];
+
     protected $fillable = [
         'opened_by',
         'closed_by',

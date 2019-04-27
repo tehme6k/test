@@ -1,74 +1,115 @@
-@extends('layouts.app')
+@extends('layouts.show')
 
-@section('content')
-
-    @if(!$box->closed_by)
-
-
-        <div class="d-flex justify-content-between">
-
+@section('jumbotron-header')
+    @if($box->status === 'open')
+        <div class="d-flex justify-content-start">
             <div>
-                @if($retentions->count() > 0)
-                    <button type="button" class="btn btn-outline-danger" onclick="handleClose()">
-                        Close this box
-                    </button>
-                @endif
-            </div>
-
-            <div>
-                <button type="button" class="btn btn-primary my-2" onclick="handleAdd()">
-                    Add Bottle
-                </button>
+                <a href="{{ route('boxes.index') }}" class="btn btn-link">View All Open Boxes</a>
             </div>
         </div>
-
-    @else
-
-        <div class="d-flex justify-content-between">
-
+    @elseif($box->status === 'closed')
+        <div class="d-flex justify-content-start">
             <div>
-                <a href="{{ route('ret.closed') }}" class="btn btn-info mb-2">
-                    Closed Boxes
-                </a>
+                <a href="{{ route('ret.closed') }}" class="btn btn-link">View All Closed Boxes</a>
             </div>
-
-
-            <div>
-                <button type="button" class="btn btn-outline-danger mb-2" onclick="handleReopen()">
-                    Reopen Box
-                </button>
-            </div>
-
-
-
-
         </div>
-
-
-
-
-
     @endif
 
-
-    <div class="card card-default">
-        <div class="card-header">Retention Box # {{$box->id}}</div>
-        <div class="card-body">
-
-            @include('partials.errors')
-            @include('partials.retention_bottles')
+    Retention Box # <strong>{{$box->id}}</strong>
+@endsection
 
 
+@section('jumbotron-under-header')
+    <strong>{{ $box->status }} -
+    @if($retentions->count() > 0)
+        {{$retentions->count()}}</strong> products
+    @else
+        </strong> No Products</h3>
+    @endif
+@endsection
 
 
+@section('jumbotron-content')
+    <h3>Started By <strong> {{ $box->openedBy->name }}</strong> {{ $box->created_at->diffForHumans() }}</h3>
+    @if($box->closedBy != null)
+        <h3>Closed by <stong>{{$box->closedBy->name}}</stong> {{ $box->closed_at->diffForHumans() }}</h3>
+    @endif
 
+    {{--<h4>Highest Expiration: <strong>{{ Carbon\Carbon::parse($retentions->max('expiration_date'))->format('m-d-Y') }}</strong></h4>--}}
+
+@endsection
+
+
+@section('jumbotron-buttons')
+    @if(!$box->closed_by)
+        <div>
+            @if($retentions->count() > 0)
+                <button type="button" class="btn btn-outline-danger mr-5" onclick="handleClose()">
+                    Close this box
+                </button>
+            @endif
+
+            <button type="button" class="btn btn-primary ml-5" onclick="handleAdd()">
+                Add Bottle
+            </button>
         </div>
-    </div>
+    @else
+        <div>
+            <button type="button" class="btn btn-outline-danger mr-5" onclick="handleReopen()">
+                Reopen Box
+            </button>
+        </div>
+    @endif
+@endsection
 
-    <div>
 
-    </div>
+@section('table-header')
+    <th>Lot #</th>
+    <th>Name</th>
+    <th>Production</th>
+    <th>Expiration</th>
+    <th>Added By</th>
+@endsection
 
+
+@if($retentions->count() > 0)
+    @section('table-body')
+        @foreach($retentions as $retention)
+            <tr>
+                <td>
+                    {{substr($retention->lot_number, 0, 4)}} -
+                    {{substr($retention->lot_number, 4, 2)}} -
+                    {{substr($retention->lot_number, 6, 3)}}
+                </td>
+
+                <td>
+                    {{$retention->project->name}} -
+                    {{$retention->project->flavor}}
+                </td>
+
+                <td>
+                    {{\Carbon\Carbon::parse($retention->production_date)->format('d M Y')}}
+                </td>
+
+                <td>
+                    {{\Carbon\Carbon::parse($retention->expiration_date)->format('d M Y')}}
+                </td>
+
+                <td>
+                    {{ $retention->user->name }}
+                </td>
+            </tr>
+        @endforeach
+    @endsection
+@else
+    @section('table-body')
+        <tr>
+            <td colspan="5">No data</td>
+        </tr>
+    @endsection
+@endif
+
+@section('content')
     <form action="{{ route('retention.add', $box->id) }}" method="POST">
         @csrf
         <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
@@ -134,7 +175,7 @@
 
 
 
-                       <p>If you are ready to close and store this box, then click 'Save changes' below.</p>
+                        <p>If you are ready to close and store this box, then click 'Save changes' below.</p>
 
                     </div>
                     <div class="modal-footer">
@@ -190,8 +231,6 @@
             </div>
         </div>
     </form>
-
-
 @endsection
 
 
