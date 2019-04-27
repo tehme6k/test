@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Bpr;
 use App\Http\Requests\AddProductToMprRequest;
 use App\Http\Requests\ApproveStatusRequest;
 use App\Http\Requests\NewMprRequest;
@@ -52,9 +53,15 @@ class MprController extends Controller
     public function show(Mpr $mpr)
     {
 
+        $bprs = Bpr::where('mpr_id', $mpr->id)
+            ->where('status', 'quarantine')
+            ->orderBy('id', 'desc')
+            ->limit(3)
+            ->get();
 
         return view('mprs.show')
             ->with('mpr', $mpr)
+            ->with('bprs', $bprs)
             ->with('allProducts', Product::all());
     }
 

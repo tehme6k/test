@@ -1,6 +1,11 @@
 @extends('layouts.show')
 
 @section('jumbotron-header')
+    <div class="d-flex justify-content-start">
+        <div>
+            <a href="{{ route('projects.show', $bpr->project_id) }}" class="btn btn-link ">Back to project</a>
+        </div>
+    </div>
     {{ $bpr->mpr->project->name }} -
     {{ $bpr->mpr->project->flavor }}
 @endsection
