@@ -86,6 +86,8 @@ class InventoryController extends Controller
 
         $total = Inventory::where('product_id', $inventory->product->id)->where('status', 'approved');
 
+        $hide_table = 'yes';
+
         if($inventory->product->category->name == 'Powder'){
             $unit = 'Kg';
         }else{
@@ -97,6 +99,7 @@ class InventoryController extends Controller
         return view('inventory.show')
             ->with('inventory', $inventory)
             ->with('total', $total)
+            ->with('hide_table', $hide_table)
             ->with('unit');
     }
 

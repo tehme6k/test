@@ -44,7 +44,7 @@ class BprController extends Controller
 
         $dt = Carbon::now();
         $dt = substr($dt->toDateString(), 2, 2);
-        $pn = $request->project_id + 1000;
+        $pn = $request->project_id;
         $count = str_pad($run_count, 3, "0", STR_PAD_LEFT);
 
         $lot = $pn.$dt.$count;
@@ -112,6 +112,7 @@ class BprController extends Controller
 
     public function show(Bpr $bpr)
     {
+
 
         return view('bprs.show')->with('bpr', $bpr);
     }

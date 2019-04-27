@@ -2,10 +2,6 @@
 
 @section('content')
     <div class="container">
-
-
-
-
         <div class="card card-default mb-2">
             <div class="card-header">
                 <div class="d-flex justify-content-between">

@@ -1,109 +1,91 @@
-@extends('layouts.app')
+@extends('layouts.show')
+
+@section('jumbotron-header')
+    {{ $bpr->mpr->project->name }} -
+    {{ $bpr->mpr->project->flavor }}
+@endsection
+
+
+@section('jumbotron-under-header')
+    Lot: <strong>
+        {{substr($bpr->lot_number, 0, 4)}} -
+        {{substr($bpr->lot_number, 4, 2)}} -
+        {{substr($bpr->lot_number, 6, 3)}}
+    </strong>
+@endsection
+
+
+@section('jumbotron-content')
+    <div class="d-flex justify-content-between">
+        <div>
+            <h3> By: <strong> {{ $bpr->mpr->createdBy->name }}</strong></h3>
+            <h4> Batch size: <strong>{{ $bpr->bottle_count }} bottles</strong></h4>
+            <h4>Theoretical Yield: <strong> {{ $bpr->powders()->sum('amount') }} </strong></h4>
+        </div>
+
+        <div>
+            <h3>Mpr Version # <strong>{{$bpr->mpr->version}}</strong></h3>
+            <h4>Created <strong>{{ $bpr->created_at->diffForHumans() }}</strong></h4>
+            <h4>Grams Per Bottle: <strong>  {{ $bpr->mpr->gpb }} </strong></h4>
+        </div>
+    </div>
+@endsection
+
+
+@section('jumbotron-buttons')
+    @if($bpr->status === 'approved')
+        <h3>
+            Issued by <strong>{{ $bpr->createdBy->name }}</strong> {{$bpr->updated_at->diffForHumans()}}
+        </h3>
+    @elseif($bpr->status === 'rejected')
+        <h3>
+            Rejected by <strong>{{ $bpr->createdBy->name }}</strong> {{$bpr->updated_at->diffForHumans()}}
+        </h3>
+        <h4>
+            Reason: <strong>{{ $bpr->reason }}</strong>
+        </h4>
+    @else
+        <button type="button" class="btn btn-primary my-2 mr-2" onclick="handleApprove()">Issue Batch</button>
+        <button type="button" class="btn btn-warning my-2" onclick="handleReject()">Reject Batch</button>
+    @endif
+@endsection
+
+@section('table-header')
+    <th>Name</th>
+    <th>Type</th>
+    <th>Quantity</th>
+    <th>UOM</th>
+@endsection
+
+@section('table-body')
+    @foreach($bpr->products as $product)
+        <tr>
+            <td>
+                {{$product->name}}
+            </td>
+
+            <td>
+                {{$product->category->name}}
+            </td>
+
+            <td>
+                {{$product->pivot->amount}}
+            </td>
+
+            <td>
+                @if($product->category->name == 'Powder')
+                    g
+                @else
+                    each
+                @endif
+            </td>
+
+        </tr>
+    @endforeach
+@endsection
+
 
 @section('content')
-
-
-
-    <section class="jumbotron text-center">
-        <div class="container">
-            <h1 class="jumbotron-heading">
-                {{ $bpr->mpr->project->name }} -
-                {{ $bpr->mpr->project->flavor }}
-            </h1>
-            <h2>
-                Lot: <strong>
-                    {{str_pad($bpr->project_id, 4, "0", STR_PAD_LEFT)}}{{str_pad($bpr->run_count, 5, "0", STR_PAD_LEFT)}}
-
-
-                    </strong>
-            </h2>
-
-            <p class="lead text-muted">
-             <div class="d-flex justify-content-between">
-                <div>
-                   <h3> By: <strong> {{ $bpr->mpr->createdBy->name }}</strong></h3>
-                   <h4> Batch size: <strong>{{ $bpr->bottle_count }} bottles</strong></h4>
-                   <h4>Theoretical Yield: <strong> {{ $bpr->powders()->sum('amount') }} </strong></h4>
-                </div>
-
-                <div>
-                    <h3>Mpr Version # <strong>{{$bpr->mpr->version}}</strong></h3>
-                    <h4>Created <strong>{{ $bpr->created_at->diffForHumans() }}</strong></h4>
-                    <h4>Grams Per Bottle: <strong>  {{ $bpr->mpr->gpb }} </strong></h4>
-                </div>
-             </div>
-            </p>
-
-            <p>
-                @if($bpr->status === 'approved')
-                    <h3>
-                        Issued by <strong>{{ $bpr->createdBy->name }}</strong> {{$bpr->updated_at->diffForHumans()}}
-                    </h3>
-                @elseif($bpr->status === 'rejected')
-                        <h3>
-                            Rejected by <strong>{{ $bpr->createdBy->name }}</strong> {{$bpr->updated_at->diffForHumans()}}
-                        </h3>
-                        <h4>
-                            Reason: <strong>{{ $bpr->reason }}</strong>
-                        </h4>
-                @else
-                    <button type="button" class="btn btn-primary my-2 mr-2" onclick="handleApprove()">Issue Batch</button>
-                    <button type="button" class="btn btn-warning my-2" onclick="handleReject()">Reject Batch</button>
-                @endif
-            </p>
-
-        </div>
-    </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <table class="table">
-            <thead>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Quantity</th>
-            <th>UOM</th>
-            </thead>
-
-            <tbody>
-            @foreach($bpr->products as $product)
-                <tr>
-                    <td>
-                        {{$product->name}}
-                    </td>
-
-                    <td>
-                        {{$product->category->name}}
-                    </td>
-
-                    <td>
-                        {{$product->pivot->amount}}
-                    </td>
-
-                    <td>
-                        @if($product->category->name == 'Powder')
-                            g
-                        @else
-                            each
-                        @endif
-                    </td>
-
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
-
-
     <form autocomplete="off" action="{{route('bprs.approve', $bpr->id)}}" method="POST">
         @csrf
         @method('PUT')
@@ -190,12 +172,6 @@
         </div>
 
     </form>
-
-
-
-
-
-
 @endsection
 
 @section('scripts')

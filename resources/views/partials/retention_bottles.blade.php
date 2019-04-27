@@ -9,32 +9,7 @@
         </thead>
 
         <tbody>
-        @foreach($retentions as $retention)
-            <tr>
-                <td>
-                    {{substr($retention->lot_number, 0, 4)}} -
-                    {{substr($retention->lot_number, 4, 2)}} -
-                    {{substr($retention->lot_number, 6, 3)}}
-                </td>
 
-                <td>
-                    {{$retention->project->name}} -
-                    {{$retention->project->flavor}}
-                </td>
-
-                <td>
-                    {{\Carbon\Carbon::parse($retention->production_date)->format('d M Y')}}
-                </td>
-
-                <td>
-                    {{\Carbon\Carbon::parse($retention->expiration_date)->format('d M Y')}}
-                </td>
-
-                <td>
-                    {{ $retention->user->name }}
-                </td>
-            </tr>
-        @endforeach
         </tbody>
     </table>
 

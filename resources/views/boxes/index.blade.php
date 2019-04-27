@@ -64,6 +64,28 @@
                     </td>
                 </tr>
             @endforeach
+
+            @if($reopen_datas->count() > 0)
+                @foreach($reopen_datas as $data)
+                    <tr class="text-warning">
+                        <td>
+                            {{$data->box_id}}
+                        </td>
+
+                        <td>
+                            {{\Carbon\Carbon::parse($data->reopen_date)->format('d M Y')}}
+                        </td>
+
+                        <td>
+                            {{ $data->requestedBy->name }}
+                        </td>
+
+                        <td>
+                            <a href="{{ route('reopen.show', [$data->box_id, $data->id]) }}" class="btn btn-outline-warning btn-sm">View Contents</a>
+                        </td>
+                    </tr>
+                @endforeach
+            @endif
             </tbody>
         </table>
 
@@ -74,50 +96,7 @@
 @endsection
 
 @section('content')
-    @if($reopen_datas->count() > 0)
-        <div class="card bg-warning  my-2">
-            <div class="card-header">
-                Reopened Retention Boxes
-            </div>
 
-            <div class="card-body">
-                <table class="table">
-                    <thead>
-                    <th>Box #</th>
-                    <th>Reopened On</th>
-                    <th>Requested By</th>
-                    <th></th>
-                    </thead>
-
-                    <tbody>
-                    @foreach($reopen_datas as $data)
-                        <tr>
-                            <td>
-                                {{$data->box_id}}
-                            </td>
-
-                            <td>
-                                {{\Carbon\Carbon::parse($data->reopen_date)->format('d M Y')}}
-                            </td>
-
-                            <td>
-                                {{ $data->requestedBy->name }}
-                            </td>
-
-                            <td>
-                                <a href="{{ route('reopen.show', [$data->box_id, $data->id]) }}" class="btn btn-info btn-sm">View Contents</a>
-                            </td>
-                        </tr>
-
-                    @endforeach
-                    </tbody>
-                </table>
-
-            </div>
-        </div>
-        @endif
-
-        </div>
 
         <form action="{{ route('boxes.store') }}" method="POST">
             @csrf
