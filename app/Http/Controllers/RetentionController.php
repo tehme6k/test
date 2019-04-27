@@ -56,8 +56,18 @@ class RetentionController extends Controller
 
     public function closed()
     {
+        $all_boxes = Box::all();
+        $closed_boxes_count = Box::where('status', 'closed')->get();
+        $open_boxes_count = Box::where('status', 'open')->get();
+        $reopen_boxes = Box::where('status', 'reopened')->get();
+
         $closed_boxes = Box::where('closed_by', '!=', null)->orderBy('id', 'DESC')->paginate(10);
-        return view('boxes.closed')->with('boxes', $closed_boxes);
+        return view('boxes.closed')
+            ->with('all_boxes', $all_boxes)
+            ->with('open_boxes_count', $open_boxes_count)
+            ->with('reopen_boxes', $reopen_boxes )
+            ->with('closed_boxes_count', $closed_boxes_count)
+            ->with('boxes', $closed_boxes);
     }
 
 

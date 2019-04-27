@@ -14,25 +14,26 @@ class BoxesController extends Controller
 
     public function index()
     {
+        $all_boxes = Box::all();
+        $closed_boxes = Box::where('status', 'closed')->get();
         $open_boxes = Box::where('status', 'open')->paginate(2);
-        $reopen_boxes_list = Box::where('status', 'reopened')->get();
+        $open_boxes_count = Box::where('status', 'open')->get();
+        $reopen_boxes = Box::where('status', 'reopened')->get();
         $reopen_datas = ReopenedBoxes::where('close_date', NULL)->get();
 
         $retired = Box::where('hold_date', Carbon::today())->get();
 
         return view('boxes.index')
             ->with('open_boxes', $open_boxes)
-            ->with('reopen_boxes', $reopen_boxes_list)
+            ->with('reopen_boxes', $reopen_boxes)
             ->with('reopen_datas', $reopen_datas)
             ->with('retired', $retired)
+            ->with('all_boxes', $all_boxes)
+            ->with('closed_boxes', $closed_boxes)
+            ->with('open_boxes_count', $open_boxes_count)
             ->with('users', User::all());
     }
 
-    public function closed()
-    {
-        $closed_boxes = Box::where('closed_by', '=', null)->orderBy('id', 'DESC')->paginate(2);
-        return view('boxes.closed')->with('boxes', $closed_boxes);
-    }
 
     public function create()
     {

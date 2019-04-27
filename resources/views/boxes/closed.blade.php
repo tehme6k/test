@@ -16,12 +16,9 @@
                     </div>
 
                     <div>
-                        <form action="{{ route('boxes.store') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="btn btn-success mb-2">
-                                Add box
-                            </button>
-                        </form>
+                        <button type="button" class="btn btn-success mb-2" onclick="handleAdd()">
+                            Add Box
+                        </button>
                     </div>
                 </div>
             </div>
@@ -29,16 +26,13 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between">
                     <div>
-                        Total Open: <br>
-                        Total Reopened:
-
+                        Total Open: <strong>{{$open_boxes_count->count()}}</strong><br>
+                        Total Reopened: <strong>{{$reopen_boxes->count()}}</strong>
                     </div>
 
                     <div>
-                        Total all: <br>
-                        Total Closed:
-
-
+                        Total Closed: <strong>{{$closed_boxes_count->count()}}</strong><br>
+                        Total all: <strong>{{$all_boxes->count()}}</strong>
                     </div>
                 </div>
             </div>
@@ -114,6 +108,46 @@
                 </div>
 
             </div>
+
+        <form action="{{ route('boxes.store') }}" method="POST">
+            @csrf
+            <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addModalLabel">Add new box?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            @if($open_boxes_count->count() > 0)
+                                You have the boxes listed already open. Are you still sure you wish to start a new box?
+                                <ul class="list-group">
+                                    @foreach($open_boxes_count as $open_box)
+                                        <li class="list-group-item">
+                                            Box[{{ $open_box->id }}]
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                You have no boxes currenly open. Click 'New Box' Below to start a new box.
+                            @endif
+
+                        </div>
+                        <div class="modal-footer d-flex justify-content-between">
+                            <div>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-primary">New Box</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
 
 @endsection
 

@@ -1,135 +1,132 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+    <div class="container">
 
-    <div class="card card-default mb-2">
-        <div class="card-header">
-            <div class="d-flex justify-content-between">
-                <div>
-                    <a href="{{ route('ret.closed') }}" class="btn btn-primary mb-2">
-                        View Closed Boxes
-                    </a>
-                </div>
-
-                <div>
-                    <button type="button" class="btn btn-success mb-2" onclick="handleAdd()">
-                        Add Box
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="card-body">
-            <div class="d-flex justify-content-between">
-                <div>
-                    Total Open: <br>
-                    Total Reopened:
-
-                </div>
-
-                <div>
-                    Total all: <br>
-                    Total Closed:
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-<div class="card card-default">
-    <div class="card-header">
-        Open Retention Boxes
-
-
-        @if(empty($retired))
-            retired
-        @endif
-
-    </div>
-    <div class="card-body">
-
-        @if($open_boxes->count() > 0)
-            <table class="table">
-                <thead>
-                <th>Box #</th>
-                <th>Opened On</th>
-                <th>Opened By</th>
-                <th></th>
-                </thead>
-
-                <tbody>
-                @foreach($open_boxes as $open_box)
-                    <tr>
-                        <td>
-                            {{$open_box->id}}
-                        </td>
-
-                        <td>
-                            {{\Carbon\Carbon::parse($open_box->created_at)->format('d M Y')}}
-                        </td>
-
-                        <td>
-                            {{ $open_box->openedBy->name }}
-                        </td>
-
-                        <td>
-                            <a href="{{ route('boxes.show', $open_box->id) }}" class="btn btn-info btn-sm">View Contents</a>
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-
-            {{$open_boxes->links()}}
-        @else
-            <h3 class="text-center">No boxes at this time</h3>
-        @endif
-
-    </div>
-</div>
-
-
-    @if($reopen_datas->count() > 0)
-        <div class="card bg-warning  my-2">
+        <div class="card card-default mb-2">
             <div class="card-header">
-                Reopened Retention Boxes
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <a href="{{ route('ret.closed') }}" class="btn btn-primary mb-2">
+                            View Closed Boxes
+                        </a>
+                    </div>
+
+                    <div>
+                        <button type="button" class="btn btn-success mb-2" onclick="handleAdd()">
+                            Add Box
+                        </button>
+                    </div>
+                </div>
             </div>
-
             <div class="card-body">
-                <table class="table">
-                    <thead>
-                    <th>Box #</th>
-                    <th>Reopened On</th>
-                    <th>Requested By</th>
-                    <th></th>
-                    </thead>
+                <div class="d-flex justify-content-between">
+                    <div>
+                        Total Open: <strong>{{$open_boxes_count->count()}}</strong><br>
+                        Total Reopened: <strong>{{$reopen_boxes->count()}}</strong>
+                    </div>
 
-                    <tbody>
-                    @foreach($reopen_datas as $data)
-                        <tr>
-                            <td>
-                                {{$data->box_id}}
-                            </td>
+                    <div>
+                        Total Closed: <strong>{{$closed_boxes->count()}}</strong><br>
+                        Total all: <strong>{{$all_boxes->count()}}</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card card-default">
+            <div class="card-header">
+                Open Retention Boxes
 
-                            <td>
-                                {{\Carbon\Carbon::parse($data->reopen_date)->format('d M Y')}}
-                            </td>
 
-                            <td>
-                                {{ $data->requestedBy->name }}
-                            </td>
+                @if(empty($retired))
+                    retired
+                @endif
 
-                            <td>
-                                <a href="{{ route('reopen.show', [$data->box_id, $data->id]) }}" class="btn btn-info btn-sm">View Contents</a>
-                            </td>
-                        </tr>
+            </div>
+            <div class="card-body">
 
-                    @endforeach
-                    </tbody>
-                </table>
+                @if($open_boxes_count->count() > 0)
+                    <table class="table">
+                        <thead>
+                        <th>Box #</th>
+                        <th>Opened On</th>
+                        <th>Opened By</th>
+                        <th></th>
+                        </thead>
+
+                        <tbody>
+                        @foreach($open_boxes as $open_box)
+                            <tr>
+                                <td>
+                                    {{$open_box->id}}
+                                </td>
+
+                                <td>
+                                    {{\Carbon\Carbon::parse($open_box->created_at)->format('d M Y')}}
+                                </td>
+
+                                <td>
+                                    {{ $open_box->openedBy->name }}
+                                </td>
+
+                                <td>
+                                    <a href="{{ route('boxes.show', $open_box->id) }}" class="btn btn-info btn-sm">View Contents</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+
+                    {{$open_boxes->links()}}
+                @else
+                    <h3 class="text-center">No boxes at this time</h3>
+                @endif
 
             </div>
         </div>
+
+
+        @if($reopen_datas->count() > 0)
+            <div class="card bg-warning  my-2">
+                <div class="card-header">
+                    Reopened Retention Boxes
+                </div>
+
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                        <th>Box #</th>
+                        <th>Reopened On</th>
+                        <th>Requested By</th>
+                        <th></th>
+                        </thead>
+
+                        <tbody>
+                        @foreach($reopen_datas as $data)
+                            <tr>
+                                <td>
+                                    {{$data->box_id}}
+                                </td>
+
+                                <td>
+                                    {{\Carbon\Carbon::parse($data->reopen_date)->format('d M Y')}}
+                                </td>
+
+                                <td>
+                                    {{ $data->requestedBy->name }}
+                                </td>
+
+                                <td>
+                                    <a href="{{ route('reopen.show', [$data->box_id, $data->id]) }}" class="btn btn-info btn-sm">View Contents</a>
+                                </td>
+                            </tr>
+
+                        @endforeach
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
         @endif
 
     </div>
@@ -147,13 +144,13 @@
                     </div>
                     <div class="modal-body">
 
-                        @if($open_boxes->count() > 0)
+                        @if($open_boxes_count->count() > 0)
                             You have the boxes listed already open. Are you still sure you wish to start a new box?
                             <ul class="list-group">
-                                @foreach($open_boxes as $open_box)
-                                    <li class="list-group-item">
-                                        Box[{{ $open_box->id }}]
-                                    </li>
+                                @foreach($open_boxes_count as $open_box)
+                                <li class="list-group-item">
+                                    Box[{{ $open_box->id }}]
+                                </li>
                                 @endforeach
                             </ul>
                         @else

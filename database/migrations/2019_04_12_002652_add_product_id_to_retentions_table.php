@@ -26,7 +26,7 @@ class AddProductIdToRetentionsTable extends Migration
     public function down()
     {
         Schema::table('retentions', function (Blueprint $table) {
-            $table->dropColumn('product_id');
+            $table->dropColumn('project_id');
         });
     }
 }
