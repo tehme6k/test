@@ -18,7 +18,7 @@ class CreateRetentionsTable extends Migration
 
             $table->string('lot_number');
             $table->timestamp('production_date');
-            $table->timestamp('expiration_date');
+            $table->timestamp('expiration_date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->integer('expiration_length');
             $table->integer('box_id');
             $table->integer('user_id');
