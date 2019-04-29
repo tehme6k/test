@@ -25,14 +25,12 @@
             <th>Role</th>
             <th>When</th>
             <th>Created By</th>
-            <th></th>
             </thead>
-
             <tbody>
             @foreach($users as $user)
                 <tr>
                     <td>
-                        {{$user->name}}
+                        <a href="{{ route('users.show', $user->id) }}">{{$user->name}}</a>
                     </td>
 
                     <td>
@@ -53,12 +51,6 @@
                         @else
                             {{ $user->createdBy->name }}
                         @endif
-                    </td>
-
-                    <td>
-                        <a href="#" class="btn btn-info btn-sm">
-                            View
-                        </a>
                     </td>
                 </tr>
             @endforeach

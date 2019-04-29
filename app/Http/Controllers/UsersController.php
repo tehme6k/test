@@ -29,9 +29,9 @@ class UsersController extends Controller
         return back();
     }
 
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        return view('users.show')->with('user', $user);
     }
 
     public function edit($id)
@@ -39,9 +39,13 @@ class UsersController extends Controller
         //
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $user->update($request->all());
+
+        session()->flash('success', 'Item Approved');
+
+        return back();
     }
 
     public function destroy($id)

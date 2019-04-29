@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/resources/views/users/show.blade.php" line="68" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="125f6b91-21d4-47e9-8bf3-b07ea0db4afd" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/users/show.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_04_10_161514_create_retentions_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_04_10_161514_create_retentions_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/boxes/create.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/categories/create.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/products/create.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/users/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/index.blade.php" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/vendor/davejamesmiller/laravel-breadcrumbs/" />
@@ -19,37 +28,72 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.env">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Bpr.php">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Providers/AppServiceProvider.php">
+        <entry file="file://$PROJECT_DIR$/resources/views/users/show.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="25" column="5" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
-              <folding>
-                <element signature="e#33#71#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="121">
+              <caret line="47" column="20" selection-start-line="47" selection-start-column="20" selection-end-line="47" selection-end-column="20" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/database/migrations/2019_04_10_161514_create_retentions_table.php">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UsersController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="393">
-              <caret line="32" column="19" lean-forward="true" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
+            <state relative-caret-position="325">
+              <caret line="47" column="22" selection-start-line="47" selection-start-column="22" selection-end-line="47" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/InventoryController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="121" column="35" lean-forward="true" selection-start-line="117" selection-end-line="132" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/inventory/show.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="51" selection-start-line="51" selection-end-line="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/users/index.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="544">
+              <caret line="32" column="65" selection-start-line="32" selection-start-column="65" selection-end-line="32" selection-end-column="65" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/products/show.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="20" lean-forward="true" selection-end-line="181" selection-end-column="11" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="blade" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -60,6 +104,11 @@
         <option value="$PROJECT_DIR$/database/migrations/2019_04_20_222047_create_bprs_table.php" />
         <option value="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_04_10_161514_create_retentions_table.php" />
+        <option value="$PROJECT_DIR$/app/User.php" />
+        <option value="$PROJECT_DIR$/resources/views/users/index.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/inventory/show.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/users/show.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" />
       </list>
     </option>
   </component>
@@ -145,7 +194,7 @@
       <path value="$PROJECT_DIR$/vendor/davejamesmiller/laravel-breadcrumbs" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="-6" />
     <option name="y" value="2" />
     <option name="width" value="1936" />
@@ -167,13 +216,45 @@
             <path>
               <item name="ret" type="b2602c69:ProjectViewProjectNode" />
               <item name="ret" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ret" type="b2602c69:ProjectViewProjectNode" />
               <item name="ret" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
-              <item name="migrations" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ret" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ret" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ret" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ret" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ret" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ret" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ret" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ret" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="inventory" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ret" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ret" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="users" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -206,24 +287,25 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1556402813625</updated>
-      <workItem from="1556402815801" duration="2926000" />
+      <workItem from="1556402815801" duration="5882000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2926000" />
+    <option name="totallyTimeSpent" value="5882000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="2" width="1936" height="1045" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="npm" side_tool="true" />
       <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="Version Control" />
-      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.33004385" />
+      <window_info anchor="bottom" id="Terminal" visible="true" weight="0.33004385" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -252,9 +334,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Bpr.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -272,6 +351,74 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="393">
           <caret line="32" column="19" lean-forward="true" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/seeds/UsersTableSeeder.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/products/show.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" lean-forward="true" selection-end-line="181" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/users/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="32" column="65" selection-start-line="32" selection-start-column="65" selection-end-line="32" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/boxes/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1173" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/boxes/box.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1326" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/inventory/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/inventory/show.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="51" selection-start-line="51" selection-end-line="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/InventoryController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="121" column="35" lean-forward="true" selection-start-line="117" selection-end-line="132" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/users/show.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="47" column="20" selection-start-line="47" selection-start-column="20" selection-end-line="47" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UsersController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="47" column="22" selection-start-line="47" selection-start-column="22" selection-end-line="47" selection-end-column="22" />
         </state>
       </provider>
     </entry>
